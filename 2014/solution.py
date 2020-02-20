@@ -1,4 +1,5 @@
 from functools import partial
+from matplotlib import pyplot as plt
 
 with open("example.txt") as f:
     line = f.readline()
@@ -17,6 +18,16 @@ with open("example.txt") as f:
         graph[(start, end)] = (cost, length)
         if bidir:
             graph[(end, start)] = (cost, length)
+
+
+def plot_graph():
+    """Plots the junctions on the 2D plane, to allow a visual inspection
+    of their relative positions.
+    """
+    plt.figure("Map")
+    plt.scatter(*zip(*positions))
+    plt.show()
+
 
 # The routes taken by each car
 routes = [
@@ -73,3 +84,6 @@ with open("output.txt") as f:
             current_node = target_node
 
     print("Score:", total_score)
+
+
+plot_graph()
