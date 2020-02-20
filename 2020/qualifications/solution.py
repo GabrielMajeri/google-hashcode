@@ -53,7 +53,7 @@ lib_by_max_score.sort(reverse=True)
 print("Oficial output")
 
 def printing_solution():
-    with open(args.output_file) as fou:
+    with open(args.output_file, "w") as fou:
         print(num_libraries,file=fou)
 
         for i in range(len(lib_by_max_score)):
