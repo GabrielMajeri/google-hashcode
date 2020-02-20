@@ -1,6 +1,8 @@
 import argparse
 from collections import namedtuple
 import sys
+from heapq import heappush, heappop
+
 
 
 parser = argparse.ArgumentParser()
@@ -29,8 +31,33 @@ with open(args.input_file) as fin:
 
         libraries[i] = Library(books, signup_time, books_per_day)
 
-with open(args.output_file, "w") as fout:
-    print(num_libraries, file=fout)
-    for idx, lib in enumerate(libraries):
-        print(idx, len(lib.books), file=fout)
-        print(*lib.books, file=fout)
+
+lib_by_max_score = []
+
+
+def calculating_sums_library(index_library):
+    suma = 0
+    for i in range(len(libraries[index_library].books)):
+        suma += scores[libraries[index_library].books[i]]
+    lib_by_max_score.append((suma, index_library))
+
+
+#Apeluri functii
+for i in range(num_libraries):
+    calculating_sums_library(i)
+
+lib_by_max_score.sort(reverse=True)
+
+#print(lib_by_max_score)
+
+print("Oficial output")
+
+def printing_solution():
+    with open(args.output_file) as fou:
+        print(num_libraries,file=fou)
+
+        for i in range(len(lib_by_max_score)):
+            print(lib_by_max_score[i][1] , len(libraries[lib_by_max_score[i][1]].books), file = fou)
+            print(libraries[lib_by_max_score[i][1]].books, file=fou)
+
+printing_solution()
