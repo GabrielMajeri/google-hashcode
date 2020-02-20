@@ -1,9 +1,11 @@
 import argparse
 from collections import namedtuple
+import sys
 
 
 parser = argparse.ArgumentParser()
 parser.add_argument("input_file")
+parser.add_argument("output_file")
 args = parser.parse_args()
 
 
@@ -26,3 +28,9 @@ with open(args.input_file) as fin:
         books = [int(x) for x in next(fin).split()]
 
         libraries[i] = Library(books, signup_time, books_per_day)
+
+with open(args.output_file, "w") as fout:
+    print(num_libraries, file=fout)
+    for idx, lib in enumerate(libraries):
+        print(idx, len(lib.books), file=fout)
+        print(*lib.books, file=fout)
