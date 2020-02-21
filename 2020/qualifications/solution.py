@@ -58,6 +58,6 @@ def printing_solution():
 
         for i in range(len(lib_by_max_score)):
             print(lib_by_max_score[i][1] , len(libraries[lib_by_max_score[i][1]].books), file = fou)
-            print(libraries[lib_by_max_score[i][1]].books, file=fou)
+            print(*libraries[lib_by_max_score[i][1]].books, file=fou)
 
 printing_solution()
